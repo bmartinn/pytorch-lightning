@@ -196,8 +196,12 @@ class TrainsLogger(LightningLoggerBase):
         Args:
             text: The value of the log (data-point).
         """
-        if self.bypass_mode() or not self._trains:
-            return None
+        if self.bypass_mode():
+            print(text)
+            return
+
+        if self._trains:
+            return
 
         self._trains.get_logger().report_text(text)
 
