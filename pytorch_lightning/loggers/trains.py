@@ -60,6 +60,8 @@ class TrainsLogger(LightningLoggerBase):
 
     Examples:
         >>> logger = TrainsLogger("lightning_log", "my-test", output_uri=".")  # doctest: +ELLIPSIS
+        TRAINS Task: ...
+        TRAINS results page: ...
         >>> logger.log_metrics({"val_loss": 1.23}, step=0)
         >>> logger.log_text("sample test")
         sample test
@@ -84,6 +86,8 @@ class TrainsLogger(LightningLoggerBase):
         super().__init__()
         if self.bypass_mode():
             self._trains = None
+            print('TRAINS Task: running in bypass mode')
+            print('TRAINS results page: disabled')
         else:
             self._trains = Task.init(
                 project_name=project_name,
