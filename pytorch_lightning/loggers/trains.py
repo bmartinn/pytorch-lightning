@@ -60,8 +60,6 @@ class TrainsLogger(LightningLoggerBase):
 
     Examples:
         >>> logger = TrainsLogger("lightning_log", "my-test", output_uri=".")  # doctest: +ELLIPSIS
-        TRAINS Task: ...
-        TRAINS results page: https://demoapp.trains.allegro.ai/.../log
         >>> logger.log_metrics({"val_loss": 1.23}, step=0)
         >>> logger.log_text("sample test")
         sample test
