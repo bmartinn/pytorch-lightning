@@ -86,6 +86,7 @@ class TrainsLogger(LightningLoggerBase):
         super().__init__()
         if self.bypass_mode():
             self._trains = None
+            print('OS ENV {}'.format(list(environ.keys())))
             print('TRAINS Task: running in bypass mode')
             print('TRAINS results page: disabled')
         else:
@@ -343,8 +344,6 @@ class TrainsLogger(LightningLoggerBase):
 
         :return: If True, all outside communication is skipped
         """
-        import sys
-        print('OS ENV {}'.format(list(environ.keys())), file=sys.stderr)
         return cls._bypass if cls._bypass is not None else bool(environ.get('GITHUB_ACTIONS'))
 
     def __getstate__(self) -> Union[str, None]:
