@@ -59,7 +59,7 @@ class TrainsLogger(LightningLoggerBase):
             sent along side the task scalars. Defaults to True.
 
     Examples:
-        >>> logger = TrainsLogger("lightning_log", "my-test", output_uri=".")  # doctest: +ELLIPSIS
+        >>> logger = TrainsLogger("lightning_log", "my-lightning-test", output_uri=".")  # doctest: +ELLIPSIS
         TRAINS Task: ...
         TRAINS results page: ...
         >>> logger.log_metrics({"val_loss": 1.23}, step=0)
@@ -343,7 +343,8 @@ class TrainsLogger(LightningLoggerBase):
 
         :return: If True, all outside communication is skipped
         """
-        return cls._bypass if cls._bypass is not None else bool(environ.get('GITHUB_ACTIONS'))
+        return cls._bypass if cls._bypass is not None else \
+            bool(environ.get('GITHUB_ACTIONS') or environ.get('CIRCLECI'))
 
     def __getstate__(self) -> Union[str, None]:
         if self.bypass_mode() or not self._trains:
