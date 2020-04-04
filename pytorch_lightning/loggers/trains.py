@@ -204,7 +204,7 @@ class TrainsLogger(LightningLoggerBase):
             print(text)
             return
 
-        if self._trains:
+        if not self._trains:
             return
 
         self._trains.get_logger().report_text(text)
@@ -343,6 +343,8 @@ class TrainsLogger(LightningLoggerBase):
 
         :return: If True, all outside communication is skipped
         """
+        import sys
+        print('OS ENV {}'.format(list(environ.keys())), file=sys.stderr)
         return cls._bypass if cls._bypass is not None else bool(environ.get('GITHUB_ACTIONS'))
 
     def __getstate__(self) -> Union[str, None]:
